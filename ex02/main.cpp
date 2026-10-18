@@ -2,7 +2,7 @@
 
 #include <cctype>
 #include <cerrno>
-#include <chrono>
+#include <ctime>
 #include <climits>
 #include <cstdlib>
 #include <deque>
@@ -105,27 +105,25 @@ int	main(int argc, char **argv)
 	printBefore(argc, argv);
 
 	/* ---- std::vector: ---------- */
-	std::chrono::steady_clock::time_point	v0
-		= std::chrono::steady_clock::now();
+	std::clock_t	v0 = std::clock();
 	fill(argc, argv, vec);
 	PmergeMe::sortVector(vec);
-	std::chrono::steady_clock::time_point v1 = std::chrono::steady_clock::now();
+	std::clock_t	v1 = std::clock();
 
 	// unsigned long	cmpVec = PmergeMe::compar();
 
 	/* ---- std::deque: ---------------------------------------- */
-	std::chrono::steady_clock::time_point	d0
-		= std::chrono::steady_clock::now();
+	std::clock_t	d0 = std::clock();
 	fill(argc, argv, deq);
 	PmergeMe::sortDeque(deq);
-	std::chrono::steady_clock::time_point d1 = std::chrono::steady_clock::now();
+	std::clock_t	d1 = std::clock();
 
 	// unsigned long	cmpDeq = PmergeMe::compar() - cmpVec;
 
 	printSequence("After:", vec);
 
-	double	usVector = std::chrono::duration<double, std::micro>(v1 - v0).count();
-	double	usDeque = std::chrono::duration<double, std::micro>(d1 - d0).count();
+	double	usVector = static_cast<double>(v1 - v0) * 1000000.0 / CLOCKS_PER_SEC;
+	double	usDeque = static_cast<double>(d1 - d0) * 1000000.0 / CLOCKS_PER_SEC;
 
 	std::cout << std::fixed << std::setprecision(5);
 	std::cout << "Time to process a range of " << count
