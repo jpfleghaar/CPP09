@@ -78,9 +78,9 @@ bool BitcoinExchange::isValidDate(const std::string &date) const
     int year, month, day;
     try
     {
-        year = std::stoi(date.substr(0, 4));
-        month = std::stoi(date.substr(5, 2));
-        day = std::stoi(date.substr(8, 2));
+        year = std::atoi(date.substr(0, 4).c_str());
+        month = std::atoi(date.substr(5, 2).c_str());
+        day = std::atoi(date.substr(8, 2).c_str());
     }
     catch (std::exception &e)
     {
@@ -164,7 +164,7 @@ bool BitcoinExchange::isValidValue(const std::string &valueStr, float &value, co
 
 void BitcoinExchange::loadDatabase(const std::string &filename)
 {
-   std::ifstream file(filename);
+   std::ifstream file(filename.c_str());
 
     if (!file.is_open())
         throw FileException();
@@ -189,7 +189,7 @@ void BitcoinExchange::loadDatabase(const std::string &filename)
             continue;
         if(!isValidDate(date))
             continue;
-        float rate = std::stof(rateStr);
+        float rate = static_cast<float>(std::strtod(rateStr.c_str(), NULL));
         database_[date] = rate;
     }
     file.close();
@@ -212,7 +212,7 @@ float BitcoinExchange::getRate(const std::string &date) const
 
 void BitcoinExchange::processInput(const std::string &filename)
 {
-    std::ifstream file(filename);
+    std::ifstream file(filename.c_str());
     if(!file.is_open())
         throw FileException();
 
