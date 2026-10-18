@@ -1,6 +1,6 @@
 # C++ Module 09 — STL
 
-Three small programs that each use a different STL container for a real problem: a Bitcoin price lookup, a Reverse Polish Notation calculator, and the Ford–Johnson merge-insertion sort (C++98).
+Three small programs that each use a different STL container for a real problem: a Bitcoin price lookup, a Reverse Polish Notation calculator, and the Ford–Johnson merge-insertion sort.
 
 *This project was created as part of the 42 curriculum by jpflegha.*
 
@@ -74,7 +74,7 @@ git clone https://github.com/jpfleghaar/CPP09.git
 cd CPP09/ex00 && make     # same for ex01 and ex02
 ```
 
-Each exercise has its own Makefile (`c++ -Wall -Wextra -Werror -std=c++98`).
+Each exercise has its own Makefile (`c++ -Wall -Wextra -Werror -std=c++17`).
 
 ## Project structure
 
