@@ -1,0 +1,17 @@
+# Build artifacts
+*.o
+*.d
+ex00/btc
+ex01/RPN
+ex02/PmergeMe
+
+# Files created by the exercises at runtime
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+
+# Secrets
+.env
+secrets/
